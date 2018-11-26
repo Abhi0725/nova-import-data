@@ -8,8 +8,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ImportController {
 	public function handle(NovaRequest $request) {
-		$resource = $request->newResource();
-		// $fileReader = $resource::$importFileReader??config('squareboat-import-data.file_reader');
+		$resource   = $request->newResource();
 		$fileReader = CsvFileReader::class ;
 
 		$data = Validator::make($request->all(), [
@@ -23,7 +22,7 @@ class ImportController {
 			Action::danger(__('An error occurred during the import'));
 		}
 
-		$resource->importData($data);
+		return $resource->importData($data);
 	}
 
 	/**
