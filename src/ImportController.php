@@ -15,25 +15,14 @@ class ImportController {
 				'file' => 'required|file|mimes:'.$fileReader::mimes(),
 			])->validate();
 
+		$file = $request->file('file');
 		try {
-			$fileReader = new $fileReader($request->file('file'));
+			$fileReader = new $fileReader($file);
 			$data       = $fileReader->readFile();
 		} catch (\Exception $e) {
-			Action::danger(__('An error occurred during the import'));
+			return Action::danger(__('An error occurred during the import'));
 		}
 
-		return $resource->importData($data);
-	}
-
-	/**
-	 * @param $data
-	 * @param NovaRequest $request
-	 * @param $resource
-	 */
-	protected function validateFields($data, $request, $resource):void {
-		$rules = collect($resource::rulesForCreation($request))->mapWithKeys(function ($rule, $key) {
-				return ['*.'.$key => $rule];
-			});
-		Validator::make($data, $rules->toArray())->validate();
+		return $resource->importData($data, $file);
 	}
 }
