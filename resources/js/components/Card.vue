@@ -1,5 +1,5 @@
 <template>
-    <card class="flex flex-col">
+    <card class="flex flex-col items-center justify-center">
         <div class="px-3 py-3">
             <h1 class="text-xl font-light">Import {{this.card.resourceLabel}}</h1>
             <form @submit.prevent="processImport" ref="form">

@@ -16,6 +16,7 @@ class ImportController {
 			])->validate();
 
 		$file = $request->file('file');
+
 		try {
 			$fileReader = new $fileReader($file);
 			$data       = $fileReader->readFile();
