@@ -1,8 +1,14 @@
 <template>
-    <card class="flex flex-col items-center justify-center">
-        <div class="px-3 py-3">
-            <h1 class="text-xl font-light">Import {{this.card.resourceLabel}}</h1>
-            <form @submit.prevent="processImport" ref="form">
+    <card class="flex mb-4 items-center justify-center h-auto">
+        <form @submit.prevent="processImport" ref="form">
+        <div class="max-w-sm rounded overflow-hidden shadow-lg white-bg ">
+          <img
+            class="w-full"
+            :src="card.image_placeholder"
+            alt="Sunset in the mountains"
+          >
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">Import {{this.card.resourceLabel}}</div>
                 <div class="py-4">
                     <span class="form-file mr-4">
                         <input
@@ -28,17 +34,22 @@
                     <div v-if="errors">
                         <p class="text-danger">{{firstError}}</p>
                     </div>
-                    <button
-                        :disabled="working"
-                        type="submit"
-                        class="btn btn-default btn-primary ml-auto"
-                    >
-                        <loader v-if="working" width="30"></loader>
-                        <span v-else>{{__('Import')}}</span>
-                    </button>
+                    
                 </div>
-            </form>
+          </div>
+
+          <div class="px-6 py-4">
+            <button
+                :disabled="working"
+                type="submit"
+                class="btn btn-sm btn-outline"
+            >
+                <loader v-if="working" width="30"></loader>
+                <span v-else>{{__('Import')}}</span>
+            </button>
+          </div>
         </div>
+        </form>
     </card>
 </template>
 

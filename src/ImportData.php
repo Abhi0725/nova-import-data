@@ -11,7 +11,7 @@ class ImportData extends Card {
 	 *
 	 * @var string
 	 */
-	public $width = 'full';
+	public $width = '1/3';
 
 	public function __construct($resource) {
 		parent::__construct();
